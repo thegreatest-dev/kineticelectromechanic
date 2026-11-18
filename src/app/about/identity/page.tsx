@@ -17,11 +17,28 @@ export default function IdentityPage() {
         </div>
       </section>
 
-      <p className="identity-intro">
-        Kinetic Electromechanical is a global integrated engineering company that produces and
-        delivers dependable systems. Our people are committed to providing reliable, sustainable
-        and accessible engineering solutions for the communities we serve.
-      </p>
+      <div className="identity-intro">
+        <p>
+          KINETIC ELECTROMECHANIC NIGERIA LIMITED is a Premier Building Services engineering and
+          Maintenance Specialists Company in Nigeria. Founded in the year 2007, offers Engineering
+          Solutions in Mechanical, Electrical and Plumbing (MEP) for projects and facilities
+          maintenance services with head office in Port Harcourt.
+        </p>
+        <p>
+          We lead in emergent roles engaging latest trend in building services and facility
+          maintenance. We use best available cost effective technology to give durable, functional
+          and best deliverables to our Clients. We are Clients preferred, professionals&apos; choice
+          in areas of Electro-Mechanical works comprising HVAC, Plumbing &amp; Drainage, Fire
+          Fighting &amp; Protection and Electrical systems, we have successfully delivered iconic
+          Projects in Nigeria and played significant role on the sustainability and maintenance of
+          the facilities.
+        </p>
+        <p>
+          Our value engineering assessment assist in cost effective system design and analysis to
+          stretch best value for money and creates benefits for our Client. We have high HSE policy
+          compliance in all our services engagements.
+        </p>
+      </div>
 
       <section className="identity-ethics" aria-labelledby="ethics-title">
         <div className="identity-ethics-image" role="img" aria-label="Kinetic Electromechanical worker" />

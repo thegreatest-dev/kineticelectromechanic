@@ -1,3 +1,8 @@
+"use client";
+
+import { CountUp } from "@/components/ui/count-up";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
+
 const highlights = [
   {
     category: "Company",
@@ -22,11 +27,12 @@ const highlights = [
 ];
 
 export function CompanyOverviewSection() {
+  const sectionReveal = useScrollReveal<HTMLElement>();
   return (
-    <section className="company-overview" aria-labelledby="overview-title">
+    <section ref={sectionReveal.ref} className={`company-overview ${sectionReveal.className}`} aria-labelledby="overview-title">
       <div className="highlight-grid">
-        {highlights.map((highlight) => (
-          <article className="highlight-card" key={highlight.title}>
+        {highlights.map((highlight, index) => (
+          <article className="highlight-card scroll-reveal is-visible" style={{ "--reveal-delay": `${index * 100}ms` } as React.CSSProperties} key={highlight.title}>
             <p>{highlight.category}</p>
             <a href="#news" className={highlight.featured ? "highlight-featured" : undefined}>
               {highlight.title}
@@ -50,18 +56,18 @@ export function CompanyOverviewSection() {
 
         <div className="overview-stats">
           <div className="overview-stat">
-            <strong className="stat-green">40%</strong>
+            <CountUp value={40} suffix="%" />
             <p>Our objective of reducing Scope 1+2 emissions from our operated activities by 2030</p>
           </div>
           <div className="overview-stat overview-art" aria-label="Abstract globe illustration">
             <span className="globe-orbit" />
           </div>
           <div className="overview-stat">
-            <strong className="stat-blue">&gt; 100,000</strong>
+            <CountUp value={100000} prefix="> " />
             <p>employees in around 120 countries</p>
           </div>
           <div className="overview-stat">
-            <strong className="stat-orange">100 years</strong>
+            <CountUp value={100} suffix=" years" />
             <p>of pioneering spirit</p>
           </div>
         </div>
@@ -69,3 +75,4 @@ export function CompanyOverviewSection() {
     </section>
   );
 }
+

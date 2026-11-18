@@ -21,6 +21,11 @@ export const metadata: Metadata = {
   description: "Kinetic electromechanical engineering and project solutions."
 };
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
+
 export default function RootLayout({
   children
 }: Readonly<{
