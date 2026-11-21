@@ -1,5 +1,6 @@
- "use client";
+"use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
 const services = [
@@ -63,10 +64,10 @@ export function CoreServicesSection() {
           />
           <h3>{service.name}</h3>
           <p>{service.description}</p>
-          <a className="service-link" href="#contact">
+          <Link className="service-link" href="/services">
             Learn more
             <img src="/icons/arrow1.png" alt="" aria-hidden="true" />
-          </a>
+          </Link>
         </article>
       </div>
     </section>

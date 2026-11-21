@@ -49,7 +49,7 @@ export default function IdentityPage() {
             taking a collective approach to achieve our ambition of being a world-class player in
             the energy transition.
           </p>
-          <Link href="/about/identity">Find out more <span aria-hidden="true">▸</span></Link>
+          <Link href="/policy">Find out more <span aria-hidden="true">▸</span></Link>
         </div>
       </section>
     </main>

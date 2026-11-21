@@ -1,63 +1,78 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
-const navigation = ["Our Company", "Services", "Policy", "Portfolio", "Careers", "News"];
+interface SubLink {
+  label: string;
+  href: string;
+}
 
-const companyMenu = [
+interface MenuSectionData {
+  title: string;
+  links: SubLink[];
+}
+
+const companyMenu: MenuSectionData[] = [
   {
     title: "Our company",
-    links: ["About Us", "Leadership"]
+    links: [
+      { label: "About Us", href: "/about" },
+      { label: "Our Identity & Profile", href: "/about/identity" }
+    ]
   }
 ];
 
-const servicesMenu = [
+const servicesMenu: MenuSectionData[] = [
   {
     title: "Our services",
     links: [
-      "Air Conditioning Design & Installation",
-      "Electrical & High Voltage Installation",
-      "Plumbing Systems Design & Installation",
-      "Facility Management",
-      "Mechanical Installation"
+      { label: "Air Conditioning Design & Installation", href: "/services" },
+      { label: "Electrical & High Voltage Installation", href: "/services" },
+      { label: "Plumbing Systems Design & Installation", href: "/services" },
+      { label: "Facility Management", href: "/services" },
+      { label: "Mechanical Installation", href: "/services" }
     ]
   }
 ];
 
-const policyMenu = [
+const policyMenu: MenuSectionData[] = [
   {
     title: "Our policy",
     links: [
-      "Sustainability",
-      "Health, Safety & Environment",
-      "Quality",
-      "Community",
-      "Ensuring Global Progress"
+      { label: "Sustainability", href: "/policy#sustainability" },
+      { label: "Health, Safety & Environment", href: "/policy#health-safety-environment" },
+      { label: "Quality Assurance", href: "/policy#quality" },
+      { label: "Community & Stakeholders", href: "/policy#community" }
     ]
   }
 ];
 
-const careersMenu = [
+const careersMenu: MenuSectionData[] = [
   {
     title: "Careers",
-    links: ["Find a job", "Our People", "Learning and development"]
+    links: [
+      { label: "Working with Us", href: "/contact" },
+      { label: "Our People & Teams", href: "/about" },
+      { label: "Professional Development", href: "/about/identity" }
+    ]
   }
 ];
 
 // Nav items for the mobile panel
 const mobileNavItems = [
   { label: "Our Company", href: "/about", hasChildren: true },
-  { label: "Services", href: "#services", hasChildren: true },
+  { label: "Services", href: "/services", hasChildren: true },
   { label: "Policy", href: "/policy", hasChildren: true },
-  { label: "Portfolio", href: "#portfolio", hasChildren: false },
-  { label: "Careers", href: "#careers", hasChildren: true },
-  { label: "News", href: "#news", hasChildren: true },
+  { label: "Portfolio", href: "/projects", hasChildren: false },
+  { label: "Careers", href: "/contact", hasChildren: false },
+  { label: "Contact Us", href: "/contact", hasChildren: false }
 ];
 
 const mobileUtilityLinks = [
-  { label: "Clients websites", href: "#", icon: "monitor" },
-  { label: "Contact", href: "#contact", icon: "envelope" },
-  { label: "Our presence in the world", href: "#", icon: "globe" },
+  { label: "Projects & Portfolio", href: "/projects", icon: "monitor" },
+  { label: "Contact Us", href: "/contact", icon: "envelope" },
+  { label: "Our Operations in Nigeria", href: "/about/identity", icon: "globe" }
 ];
 
 export function SiteHeader() {
@@ -83,9 +98,9 @@ export function SiteHeader() {
 
   return (
     <header className={`site-header${scrolled ? " scrolled" : ""}${menuOpen ? " menu-open" : ""}`}>
-      <a className="brand" href="/" aria-label="Kinetic Electromechanical home">
+      <Link className="brand" href="/" aria-label="Kinetic Electromechanical home">
         <img className="brand-logo" src="/logos/logo1.png" alt="Kinetic Electromechanical" />
-      </a>
+      </Link>
 
       <div className="mobile-header-actions">
         <button type="button" className="mobile-search" aria-label="Search">
@@ -109,28 +124,28 @@ export function SiteHeader() {
       <div className="header-content">
         <nav className="main-nav" id="primary-navigation" aria-label="Main navigation">
           <div className="company-nav-item">
-            <a href="/about" className="company-nav-link">Our Company</a>
+            <Link href="/about" className="company-nav-link">Our Company</Link>
             <MegaMenu sections={companyMenu} />
           </div>
           <div className="company-nav-item">
-            <a href="#services" className="company-nav-link">Services</a>
+            <Link href="/services" className="company-nav-link">Services</Link>
             <MegaMenu sections={servicesMenu} />
           </div>
           <div className="company-nav-item">
-            <a href="/policy" className="company-nav-link">Policy</a>
+            <Link href="/policy" className="company-nav-link">Policy</Link>
             <MegaMenu sections={policyMenu} />
           </div>
-          <a href="#portfolio">Portfolio</a>
+          <Link href="/projects">Portfolio</Link>
           <div className="company-nav-item">
-            <a href="#careers" className="company-nav-link">Careers</a>
+            <Link href="/contact" className="company-nav-link">Careers</Link>
             <MegaMenu sections={careersMenu} />
           </div>
-          <a href="#news">News</a>
+          <Link href="/contact">Contact</Link>
         </nav>
         <div className="utility-nav">
-          <a className="client-link" href="#contact">
+          <Link className="client-link" href="/contact">
             Contact Us
-          </a>
+          </Link>
         </div>
       </div>
 
@@ -160,9 +175,9 @@ export function SiteHeader() {
           <ul>
             {mobileNavItems.map((item) => (
               <li key={item.label} className="mobile-panel-nav-item">
-                <a href={item.href} className="mobile-panel-nav-link" onClick={() => setMenuOpen(false)}>
+                <Link href={item.href} className="mobile-panel-nav-link" onClick={() => setMenuOpen(false)}>
                   {item.label}
-                </a>
+                </Link>
                 {item.hasChildren && (
                   <span className="mobile-panel-chevron" aria-hidden="true">›</span>
                 )}
@@ -174,18 +189,17 @@ export function SiteHeader() {
         {/* Utility links */}
         <div className="mobile-panel-utility">
           {mobileUtilityLinks.map((link) => (
-            <a key={link.label} href={link.href} className="mobile-panel-utility-link" onClick={() => setMenuOpen(false)}>
+            <Link key={link.label} href={link.href} className="mobile-panel-utility-link" onClick={() => setMenuOpen(false)}>
               <span className="mobile-panel-utility-icon" aria-hidden="true">
                 {link.icon === "monitor" && <MonitorIcon />}
                 {link.icon === "envelope" && <EnvelopeIcon />}
                 {link.icon === "globe" && <GlobeIcon />}
               </span>
               {link.label}
-            </a>
+            </Link>
           ))}
           <div className="mobile-panel-language">
-            <span>English</span>
-            <span className="mobile-panel-chevron" aria-hidden="true">›</span>
+            <span>Nigeria (EN)</span>
           </div>
         </div>
       </div>
@@ -202,7 +216,7 @@ export function SiteHeader() {
   );
 }
 
-function MegaMenu({ sections }: { sections: typeof companyMenu }) {
+function MegaMenu({ sections }: { sections: MenuSectionData[] }) {
   return (
     <div className="company-menu" role="menu">
       {sections.map((section) => (
@@ -216,39 +230,27 @@ function MegaMenu({ sections }: { sections: typeof companyMenu }) {
 
 function MenuSection({
   title,
-  links,
-  extraTitle,
-  groups,
-  extraLinks
+  links
 }: {
   title: string;
-  links: string[];
-  extraTitle?: string;
-  extraLinks?: string[];
-  groups?: { title: string; links: string[] }[];
+  links: SubLink[];
 }) {
   return (
     <section className="company-menu-section">
       <h2>{title}</h2>
       <MenuLinks links={links} />
-      {extraTitle && <h2>{extraTitle}</h2>}
-      {extraLinks && <MenuLinks links={extraLinks} />}
-      {groups?.map((group) => (
-        <div className="company-menu-group" key={group.title}>
-          <h3>{group.title}</h3>
-          <MenuLinks links={group.links} />
-        </div>
-      ))}
     </section>
   );
 }
 
-function MenuLinks({ links }: { links: string[] }) {
+function MenuLinks({ links }: { links: SubLink[] }) {
   return (
     <ul>
       {links.map((link) => (
-        <li key={link}>
-          <a href={link === "About Us" ? "/about/identity" : link === "Leadership" ? "/about" : link === "Sustainability" ? "/policy#sustainability" : link === "Health, Safety & Environment" ? "/policy#health-safety-environment" : link === "Quality" ? "/policy#quality" : link === "Community" ? "/policy#community" : link === "Ensuring Global Progress" ? "/policy#global-progress" : "#our-company"} role="menuitem">{link}</a>
+        <li key={link.label}>
+          <Link href={link.href} role="menuitem">
+            {link.label}
+          </Link>
         </li>
       ))}
     </ul>

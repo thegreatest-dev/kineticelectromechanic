@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
 export function HeroSection() {
@@ -21,7 +22,7 @@ export function HeroSection() {
           We design dependable electromechanical systems that move industries
           forward and shape the infrastructure of tomorrow.
         </p>
-        <a className="hero-button" href="#projects">Explore our work</a>
+        <Link className="hero-button" href="/projects">Explore our work</Link>
         <div className="hero-controls" aria-label="Hero carousel controls">
           <button
             type="button"
